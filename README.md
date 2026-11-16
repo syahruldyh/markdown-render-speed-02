@@ -46,3 +46,5 @@ Node 22.
 - `main.ts` — the driver.
 - `LICENSE`, `NOTICE` — marked's MIT license and notice (the fork keeps
   them, as the competition rules require).
+
+License: MIT (see LICENSE).

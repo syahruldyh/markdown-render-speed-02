@@ -1,3 +1,4 @@
+// Fork of marked 18.1.3, optimized for markdown-render-speed-02 (MIT).
 /**
  * marked v18.1.3 - a markdown parser
  * Copyright (c) 2018-2026, MarkedJS. (MIT License)

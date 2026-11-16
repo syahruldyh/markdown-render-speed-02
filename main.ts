@@ -1,3 +1,4 @@
+// Driver for markdown-render-speed-02: renders each case with parse() and writes html.json.
 // Driver for the markdown-render-speed-02 entry.
 // Reads every case from cases.json, renders each one alone with parse()
 // from parse.js, and writes the HTML strings (in the cases' order) to
