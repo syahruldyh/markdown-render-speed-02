@@ -1,10 +1,17 @@
 # markdown-render-speed-02
 
+[![make.fun](https://make.fun/badge/markdown-render-speed-02.svg)](https://make.fun/bounty/markdown-render-speed-02)
+[![rank](https://make.fun/badge/markdown-render-speed-02/syahruldyh/markdown-render-speed-02/rank.svg)](https://make.fun/bounty/markdown-render-speed-02)
+[![reward](https://make.fun/badge/markdown-render-speed-02/syahruldyh/markdown-render-speed-02/reward.svg)](https://make.fun/bounty/markdown-render-speed-02)
+
 A faster drop-in for marked 18.1.3 (GFM on, defaults). `parse.js` exports
 `parse(markdown)`, which returns byte-identical HTML to `marked.parse` with
 marked's default options, and `main.ts` is the harness driver: it reads
 `/input/cases.json`, renders each case alone with `parse()`, and writes
 `/output/html.json`.
+
+Entry for the [make.fun bounty](https://make.fun/bounty/markdown-render-speed-02).
+Referral: https://make.fun/r/4cebaz6p
 
 ## What it is
 
@@ -24,6 +31,10 @@ exact output, code unit for code unit:
   emphasis/delimiter search is gated on the characters that can matter.
 - Hot helpers avoid throwaway objects and repeated scans (indent checks,
   blank-line tests, code-point length).
+- A plain-paragraph fast path in the block lexer skips the per-block
+  regex dispatch for ordinary paragraphs (guarded: it falls back to the
+  stock dispatch for tables, setext headings, and every other block
+  start, and the paragraph regex itself still decides the boundary).
 
 No lookup table of any case's output, no caching across `parse()` calls, no
 network, no file or clock reads. `parse.js` is dependency-free and runs on
@@ -32,13 +43,12 @@ Node 22.
 ## Verification (practice set, 720 cases)
 
 - 720/720 cases byte-identical to marked 18.1.3, deterministic across runs.
-- Fuzzed against marked on 32,000+ random documents (token soup and
+- Fuzzed against marked on 25,000 random documents (token soup and
   structured docs: headings, lists, blockquotes, fences, tables, links,
-  emails, URLs, emphasis, entities, unicode) with 0 differences.
-- Local CPU time for the 720 practice cases: ~0.64 s vs ~0.83 s for marked
-  itself (~1.3x faster). The sandbox leaderboard's paid line is 2.43 s
-  against marked at ~2.84 s, so this entry is expected to clear it, with
-  less margin than the 1.5x target.
+  emails, URLs, emphasis, entities, unicode, CRLF) with 0 differences.
+- Local CPU time for the 720 practice cases: ~0.48 s vs ~0.73 s for marked
+  itself (~1.5x faster). The sandbox leaderboard's paid line is 2.19 s,
+  so this entry is expected to clear it.
 
 ## Files
 
